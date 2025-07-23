@@ -1,0 +1,25 @@
+# name: test/sql/primes.test
+# description: test primes extension
+# group: [primes]
+
+# Before we load the extension, this will fail
+statement error
+SELECT primes(20);
+----
+Catalog Error: Scalar Function with name primes does not exist!
+
+# Require statement will ensure the extension is loaded from now on
+require primes
+
+# Confirm the extension works
+query I
+SELECT * from primes(20);
+----
+2
+3
+5
+7
+11
+13
+17
+19
